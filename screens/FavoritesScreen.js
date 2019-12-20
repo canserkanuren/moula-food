@@ -6,6 +6,9 @@ export default class FavoritesScreen extends Component {
   static propTypes = {
     prop: PropTypes
   }
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   render() {
     return (
