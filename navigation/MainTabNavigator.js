@@ -3,10 +3,12 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SearchScreen from '../screens/SearchScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import ScannerScreen from '../screens/ScannerScreen';
 
 const tabNavigator = createMaterialBottomTabNavigator(
   {
@@ -17,7 +19,7 @@ const tabNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => (
           <Icon color={tintColor} size={25} name={'ios-home'} />
         ),
-        barStyle: { backgroundColor: 'black' }
+        barStyle: { backgroundColor: 'teal' }
       }
     },
     History: {
@@ -37,7 +39,7 @@ const tabNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => (
           <Icon color={tintColor} size={25} name={'ios-star'} />
         ),
-        barStyle: { backgroundColor: 'teal' }
+        barStyle: { backgroundColor: 'teal' },
       }
     }
   },
@@ -46,4 +48,22 @@ const tabNavigator = createMaterialBottomTabNavigator(
   }
 );
 
-export default createAppContainer(tabNavigator);
+
+const rootStack = createStackNavigator(
+  {
+    Main: {
+      screen: tabNavigator
+    },
+    Scanner: {
+      screen: ScannerScreen,
+      navigationOptions: {
+        title: 'Scanner un produit'
+      }
+    }
+  },
+  {
+    initialRouteName: 'Main'
+  }
+)
+
+export default createAppContainer(rootStack);
