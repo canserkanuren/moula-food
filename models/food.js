@@ -3,7 +3,7 @@ export class Food {
     if (model) {
       this.name = model.product.product_name || model.product_name_fr;
       this.brands = model.product.brands;
-      this.nutriscore_grade = model.product.nutriscore_grade;
+      this.nutriscore = model.product.nutriscore_grade;
       this.imageUrl = model.product.image_url;
       this.novaGroup = model.product.nova_group;
       this.proteins = model.product.nutriments.proteins_100g;
