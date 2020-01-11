@@ -1,12 +1,11 @@
-import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export default StyleSheet.create({
   container: {
     flex: 1
   },
   scrollView: {
-    marginHorizontal: 20,
+    paddingHorizontal: 20,
   },
   flexContainer: {
     flex: 1,
@@ -28,7 +27,8 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
-    elevation: 2
+    elevation: 2,
+    maxWidth: Math.round((Dimensions.get('window').width) / 2)
   },
   itemImage: {
     width: 150,

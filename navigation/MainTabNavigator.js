@@ -54,20 +54,6 @@ const favoritesNavigator = createStackNavigator({
   }
 });
 
-const historyNavigator = createStackNavigator({
-  History: { screen: HistoryScreen }
-}, {
-  initialRouteName: 'History',
-  defaultNavigationOptions: {
-      headerStyle: {
-          backgroundColor: '#EEEEEE'
-      },
-      headerTitleStyle: {
-          fontWeight: 'bold'
-      }
-  }
-});
-
 const tabNavigator = createMaterialBottomTabNavigator(
   {
     Search: {
