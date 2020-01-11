@@ -21,9 +21,9 @@ export default class ScannerButton extends Component {
         <ActionButton
           buttonColor="rgba(231,76,60,1)"
           title="Open Scanner"
-          onPress={this.openScanner} 
-          renderIcon={() => (<Icon name="md-camera" /> )}>
-          </ActionButton>
+          onPress={this.openScanner}
+          renderIcon={() => (<Icon name="md-camera" />)}>
+        </ActionButton>
       </View>
     );
   }
