@@ -28,7 +28,7 @@ export default class HistoryScreen extends Component {
 
   static navigationOptions = (e) => {
     return {
-      title: 'Historique'
+      title: 'Mon historique'
     }
   }
 

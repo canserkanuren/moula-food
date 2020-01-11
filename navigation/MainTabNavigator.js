@@ -3,11 +3,56 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SearchScreen from '../screens/SearchScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import ScannerScreen from '../screens/ScannerScreen';
+
+
+const searchNavigator = createStackNavigator({
+  Search: { screen: SearchScreen },
+  Scanner: { screen: ScannerScreen }
+}, {
+  initialRouteName: 'Search',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
+
+const historyNavigator = createStackNavigator({
+  History: { screen: HistoryScreen }
+}, {
+  initialRouteName: 'History',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
+
+const favoritesNavigator = createStackNavigator({
+  Favorites: { screen: FavoritesScreen }
+}, {
+  initialRouteName: 'Favorites',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
 
 const historyNavigator = createStackNavigator({
   History: { screen: HistoryScreen }
@@ -26,13 +71,13 @@ const historyNavigator = createStackNavigator({
 const tabNavigator = createMaterialBottomTabNavigator(
   {
     Search: {
-      screen: SearchScreen,
+      screen: searchNavigator,
       navigationOptions: {
-        tabBarLabel: 'Accueil',
+        tabBarLabel: 'Recherche',
         tabBarIcon: ({ tintColor }) => (
-          <Icon color={tintColor} size={25} name={'ios-home'} />
+          <Icon color={tintColor} size={25} name={'ios-search'} />
         ),
-        barStyle: { backgroundColor: 'black' }
+        barStyle: { backgroundColor: 'teal' }
       }
     },
     History: {
@@ -46,13 +91,13 @@ const tabNavigator = createMaterialBottomTabNavigator(
       }
     },
     Favorites: {
-      screen: FavoritesScreen,
+      screen: favoritesNavigator,
       navigationOptions: {
         tabBarLabel: 'Favoris',
         tabBarIcon: ({ tintColor }) => (
           <Icon color={tintColor} size={25} name={'ios-star'} />
         ),
-        barStyle: { backgroundColor: 'teal' }
+        barStyle: { backgroundColor: 'teal' },
       }
     }
   },
