@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 import FoodService from '../services/FoodService'
 import { nutriscore, novascore } from '../constant/constant';
 
@@ -19,28 +19,83 @@ export default class DetailsScreen extends Component {
 
   render() {
     return (
-      <View style={{ margin: 10}}>
-        <Image
-          style={{ width: 100, height: 200, borderRadius: 5, margin: 3, resizeMode: 'stretch' }}
-          source={{ uri: this.state.produit.imageUrl }}
-        />
-        <Text>{this.state.produit.name}</Text>
-        <Text>{this.state.produit.brands}</Text>
+      <View style={Styles.container}>
+        <View style={Styles.row}>
+          <Image
+            style={Styles.imageProduit}
+            source={{ uri: this.state.produit.imageUrl }}
+          />
+          <View>
+            <Text style={Styles.title}>{this.state.produit.name}</Text>
+            <Text>{this.state.produit.brands}</Text>
+          </View>
+        </View>
+        <View style={Styles.score}>
         {
           this.state.imageUrl ? (
           <Image
-            style={{ width: 150, height: 90, borderRadius: 5, margin: 3, resizeMode: 'stretch'}}
+            style={Styles.nutriscore}
             source={this.state.imageUrl}
           />) : (<></>)
         }
         {
           this.state.novaScore ? (
           <Image
-            style={{ width: 50, height: 100, borderRadius: 5, margin: 3, resizeMode: 'stretch'}}
+            style={Styles.novascore}
             source={this.state.novaScore}
           />) : (<></>)
         }
+        </View>
       </View>
     )
   }
 }
+export const Styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    margin: 10
+  },
+  row: {
+    flexDirection: 'row',
+    margin: 0,
+    padding: 0
+  },
+  imageProduit: {
+    height: 130,
+    width: 80,
+    marginRight: 5,
+    borderRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.30,
+    elevation: 13
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  nutriscore: {
+    width: 150,
+    height: 80,
+    borderRadius: 5,
+    margin: 3,
+    resizeMode: 'stretch'
+  },
+  novascore: {
+    width: 50,
+    height: 80,
+    borderRadius: 5,
+    margin: 3,
+    resizeMode: 'stretch'
+  },
+  score: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+})
