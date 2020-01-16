@@ -6,12 +6,14 @@ export class Food {
       this.nutriscore = model.product.nutriscore_grade;
       this.imageUrl = model.product.image_url;
       this.novaGroup = model.product.nova_group;
-      this.proteins = model.product.nutriments.proteins_100g;
-      this.fiber = model.product.nutriments.fiber_100g;
-      this.sugars = model.product.nutriments.sugars_100g;
-      this.salt = model.product.nutriments.salt_100g;
-      this.calories = Math.round(model.product.nutriments['energy-kj_100g'] / 4.184);
-      this.saturatedFat = model.product.nutriscore_data.saturated_fat;
+      this.nutriments = [
+        { name: 'proteins', value: model.product.nutriments.proteins || ''},
+        { name: 'fiber', value: model.product.nutriments.fiber || '' },
+        { name: 'sugars', value: model.product.nutriments.sugars || '' },
+        { name: 'salt', value: model.product.nutriments.salt || '' },
+        { name: 'calories', value: model.product.nutriments.energy || '' },
+        { name: 'saturatedFat', value: model.product.nutriments.saturated_fat || '' }
+      ]
     }
   }
 }

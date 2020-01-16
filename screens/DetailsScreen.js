@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, FlatList } from 'react-native'
 import FoodService from '../services/FoodService'
 import { nutriscore, novascore } from '../constant/constant';
+import InfoNutrition from '../components/common/InfoNutrition';
 
 export default class DetailsScreen extends Component {
   state = { produit: {}, imageUrl: '' }
@@ -10,9 +11,9 @@ export default class DetailsScreen extends Component {
   componentDidMount() {
     if (this.props.navigation.state.params.codebarre) {
       this.foodService.get(this.props.navigation.state.params.codebarre)
-        .then((data) => {
-          this.setState({ produit: data, imageUrl: nutriscore(data.nutriscore), novaScore: novascore(data.novaGroup)});
-          console.log(data);
+      .then((data) => {
+        console.log(data);
+          this.setState({ produit: data, imageUrl: data.nutriscore ? nutriscore(data.nutriscore): '', novaScore: data.novaGroup ? novascore(data.novaGroup): ''});
         })
     }
   }
@@ -46,6 +47,15 @@ export default class DetailsScreen extends Component {
           />) : (<></>)
         }
         </View>
+        {(
+          <>
+            <FlatList
+              data={this.state.produit}
+              keyExtractor={item => item}
+              renderItem={({ item }) => <InfoNutrition/>}
+            />
+          </>
+        )}
       </View>
     )
   }
@@ -65,15 +75,7 @@ export const Styles = StyleSheet.create({
     height: 130,
     width: 80,
     marginRight: 5,
-    borderRadius: 3,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.30,
-    elevation: 13
+    borderRadius: 3
   },
   title: {
     fontWeight: 'bold',
