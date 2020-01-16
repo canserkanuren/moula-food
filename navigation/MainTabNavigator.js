@@ -9,11 +9,18 @@ import SearchScreen from '../screens/SearchScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import ScannerScreen from '../screens/ScannerScreen';
+import DetailsScreen from '../screens/DetailsScreen';
 
 
 const searchNavigator = createStackNavigator({
   Search: { screen: SearchScreen },
-  Scanner: { screen: ScannerScreen }
+  Scanner: { screen: ScannerScreen },
+  Detail: {
+    screen: DetailsScreen,
+    navigationOptions: {
+      title: 'Détail du produit'
+    }
+  }
 }, {
   initialRouteName: 'Search',
   defaultNavigationOptions: {
