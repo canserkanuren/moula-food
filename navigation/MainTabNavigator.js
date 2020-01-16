@@ -12,54 +12,78 @@ import ScannerScreen from '../screens/ScannerScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 
 
-const searchNavigator = createStackNavigator({
-  Search: { screen: SearchScreen },
-  Scanner: { screen: ScannerScreen },
-  Detail: {
-    screen: DetailsScreen,
-    navigationOptions: {
-      title: 'Détail du produit'
+const searchNavigator = createStackNavigator(
+  {
+    Search: { screen: SearchScreen },
+    Scanner: { screen: ScannerScreen },
+    Detail: {
+      screen: DetailsScreen,
+      navigationOptions: {
+        title: 'Détail du produit'
+      }
     }
-  }
-}, {
-  initialRouteName: 'Search',
-  defaultNavigationOptions: {
+  },
+  {
+    initialRouteName: 'Search',
+    defaultNavigationOptions: {
       headerStyle: {
-          backgroundColor: 'teal'
+        backgroundColor: 'teal',
+        color: 'white'
       },
-      headerTitleStyle: {
-          fontWeight: 'bold'
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
       }
-  }
-});
+    }
+  });
 
-const historyNavigator = createStackNavigator({
-  History: { screen: HistoryScreen }
-}, {
-  initialRouteName: 'History',
-  defaultNavigationOptions: {
+const historyNavigator = createStackNavigator(
+  {
+    History: { screen: HistoryScreen },
+    Scanner: { screen: ScannerScreen }
+  },
+  {
+    initialRouteName: 'History',
+    defaultNavigationOptions: {
       headerStyle: {
-          backgroundColor: 'teal'
+        backgroundColor: 'teal'
       },
-      headerTitleStyle: {
-          fontWeight: 'bold'
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
       }
-  }
-});
+    }
+  });
 
-const favoritesNavigator = createStackNavigator({
-  Favorites: { screen: FavoritesScreen }
-}, {
-  initialRouteName: 'Favorites',
-  defaultNavigationOptions: {
+const favoritesNavigator = createStackNavigator(
+  {
+    Favorites: { screen: FavoritesScreen },
+    Scanner: { screen: ScannerScreen }
+  },
+  {
+    initialRouteName: 'Favorites',
+    defaultNavigationOptions: {
       headerStyle: {
-          backgroundColor: 'teal'
+        backgroundColor: 'teal'
       },
-      headerTitleStyle: {
-          fontWeight: 'bold'
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
       }
-  }
-});
+    }
+  });
 
 const tabNavigator = createMaterialBottomTabNavigator(
   {
