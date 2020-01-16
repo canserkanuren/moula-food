@@ -28,7 +28,7 @@ const mapActionsToProps = (barcode) => {
   return {
     shopping: {
       init: bindActionCreators(initShoppingList, barcode),
-      clear: clearShoppingList(clearShoppingList, barcode),
+      clear: bindActionCreators(clearShoppingList, barcode),
       remove: bindActionCreators(delFromShoppingList, barcode)
     }
   }
