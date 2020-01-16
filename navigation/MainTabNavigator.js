@@ -16,12 +16,7 @@ const searchNavigator = createStackNavigator(
   {
     Search: { screen: SearchScreen },
     Scanner: { screen: ScannerScreen },
-    Detail: {
-      screen: DetailsScreen,
-      navigationOptions: {
-        title: 'Détail du produit'
-      }
-    }
+    Detail: { screen: DetailsScreen }
   },
   {
     initialRouteName: 'Search',
@@ -44,7 +39,8 @@ const searchNavigator = createStackNavigator(
 const historyNavigator = createStackNavigator(
   {
     History: { screen: HistoryScreen },
-    Scanner: { screen: ScannerScreen }
+    Scanner: { screen: ScannerScreen },
+    Detail: { screen: DetailsScreen }
   },
   {
     initialRouteName: 'History',
@@ -66,7 +62,8 @@ const historyNavigator = createStackNavigator(
 const favoritesNavigator = createStackNavigator(
   {
     Favorites: { screen: FavoritesScreen },
-    Scanner: { screen: ScannerScreen }
+    Scanner: { screen: ScannerScreen },
+    Detail: { screen: DetailsScreen }
   },
   {
     initialRouteName: 'Favorites',

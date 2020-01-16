@@ -24,6 +24,7 @@ class HistoryScreen extends Component {
   componentDidMount() {
     this.props.history.scanned.init();
     this.setState({ historyProducts: this.props.products.scanned.concat(this.props.products.searched) });
+    console.log('this.props.products.scanned.concat(this.props.products.searched)', this.props.products.scanned.concat(this.props.products.searched));
   }
 
   render() {
@@ -36,8 +37,8 @@ class HistoryScreen extends Component {
                 <ScrollView style={historyStyle.scrollView}>
                   <View style={historyStyle.flexContainer}>
                     {
-                      historyProducts.map((item, key) =>
-                        <ProductCard product={item} key={item.barcode} />
+                      this.state.historyProducts.map((item, key) =>
+                        <ProductCard product={item} key={item} />
                       )
                     }
                   </View>

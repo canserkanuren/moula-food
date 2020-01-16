@@ -3,15 +3,25 @@ import { View, Text, Image, StyleSheet, FlatList } from 'react-native'
 import FoodService from '../services/FoodService'
 import { nutriscore, novascore } from '../constant/constant';
 import InfoNutrition from '../components/common/InfoNutrition';
+import ShareButton from '../components/common/ShareButton';
 
 export default class DetailsScreen extends Component {
+  static navigationOptions = (e) => {
+    return {
+      title: 'Détail du produit',
+      headerRight: (
+        <ShareButton
+          food={e.navigation.state.params.food} />)
+    }
+  };
+
   state = { produit: {}, imageUrl: '' }
   foodService = new FoodService();
 
   componentDidMount() {
     const { food } = this.props.navigation.state.params;
     if (food) {
-      this.setState({ produit: food, imageUrl: food.nutriscore ? nutriscore(food.nutriscore): '', novaScore: food.novaGroup ? novascore(food.novaGroup): ''});
+      this.setState({ produit: food, imageUrl: food.nutriscore ? nutriscore(food.nutriscore) : '', novaScore: food.novaGroup ? novascore(food.novaGroup) : '' });
     }
   }
 
@@ -29,27 +39,27 @@ export default class DetailsScreen extends Component {
           </View>
         </View>
         <View style={Styles.score}>
-        {
-          this.state.imageUrl ? (
-          <Image
-            style={Styles.nutriscore}
-            source={this.state.imageUrl}
-          />) : (<></>)
-        }
-        {
-          this.state.novaScore ? (
-          <Image
-            style={Styles.novascore}
-            source={this.state.novaScore}
-          />) : (<></>)
-        }
+          {
+            this.state.imageUrl ? (
+              <Image
+                style={Styles.nutriscore}
+                source={this.state.imageUrl}
+              />) : (<></>)
+          }
+          {
+            this.state.novaScore ? (
+              <Image
+                style={Styles.novascore}
+                source={this.state.novaScore}
+              />) : (<></>)
+          }
         </View>
         {(
           <>
             <FlatList
               data={this.state.produit}
               keyExtractor={item => item}
-              renderItem={({ item }) => <InfoNutrition/>}
+              renderItem={({ item }) => <InfoNutrition />}
             />
           </>
         )}
