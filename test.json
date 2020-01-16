@@ -1,0 +1,244 @@
+{
+    "nutrition_data_prepared": "",
+    "cities_tags": [],
+    "packaging": "",
+    "ingredients_original_tags": [],
+    "minerals_prev_tags": [],
+    "purchase_places_tags": [],
+    "allergens_from_ingredients": "",
+    "stores": "",
+    "entry_dates_tags": [
+      "2017-11-29",
+      "2017-11",
+      "2017"
+    ],
+    "traces_from_ingredients": "",
+    "lc": "fr",
+    "origins_tags": [],
+    "editors_tags": [
+      "sebleouf"
+    ],
+    "categories_hierarchy": [],
+    "ingredients_text": "",
+    "link": "",
+    "id": "12210787",
+    "ingredients_tags": [],
+    "codes_tags": [
+      "code-8",
+      20164294,
+      "2016429x",
+      "201642xx",
+      "20164xxx",
+      "2016xxxx",
+      "201xxxxx",
+      "20xxxxxx",
+      "2xxxxxxx"
+    ],
+    "categories_prev_hierarchy": [],
+    "misc_tags": [
+      "en:nutriscore-not-computed"
+    ],
+    "additives_prev_tags": [],
+    "labels_prev_hierarchy": [],
+    "additives_prev_original_tags": [],
+    "vitamins_tags": [],
+    "nutrient_levels_tags": [],
+    "amino_acids_prev_tags": [],
+    "ingredients_from_palm_oil_tags": [],
+    "languages_codes": {
+      "fr": 1
+    },
+    "labels_debug_tags": [],
+    "nucleotides_tags": [],
+    "link_debug_tags": [],
+    "ingredients_text_with_allergens": "",
+    "update_key": "novacat",
+    "ingredients_hierarchy": [],
+    "last_edit_dates_tags": [
+      "2018-11-18",
+      "2018-11",
+      "2018"
+    ],
+    "last_image_t": 1511943689,
+    "ingredients_that_may_be_from_palm_oil_tags": [],
+    "interface_version_modified": "20120622",
+    "ingredients_text_fr": "",
+    "unknown_nutrients_tags": [],
+    "languages_hierarchy": [
+      "en:french"
+    ],
+    "last_modified_t": 1542566911,
+    "complete": 0,
+    "traces_tags": [],
+    "ingredients_text_fr_debug_tags": [],
+    "no_nutrition_data": "",
+    "brands_tags": [],
+    "traces_from_user": "(fr)",
+    "pnns_groups_2": "unknown",
+    "minerals_tags": [],
+    "stores_tags": [],
+    "pnns_groups_2_tags": [
+      "unknown"
+    ],
+    "quality_tags": [
+      "quantity-not-recognized"
+    ],
+    "nutrition_data_per": "100g",
+    "unknown_ingredients_n": 0,
+    "ingredients": [],
+    "serving_quantity": 0,
+    "manufacturing_places": "",
+    "generic_name": "",
+    "vitamins_prev_tags": [],
+    "origins": "",
+    "informers_tags": [
+      "sebleouf"
+    ],
+    "images": {
+      "1": {
+        "uploader": "openfoodfacts-contributors",
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 75
+          },
+          "400": {
+            "w": 300,
+            "h": 400
+          },
+          "full": {
+            "w": 1500,
+            "h": 2000
+          }
+        },
+        "uploaded_t": "1511943640"
+      },
+      "2": {
+        "uploaded_t": "1511943688",
+        "uploader": "openfoodfacts-contributors",
+        "sizes": {
+          "100": {
+            "w": 100,
+            "h": 75
+          },
+          "400": {
+            "h": 300,
+            "w": 400
+          },
+          "full": {
+            "w": 2000,
+            "h": 1500
+          }
+        }
+      },
+      "front_fr": {
+        "x1": -1,
+        "normalize": null,
+        "sizes": {
+          "100": {
+            "h": 100,
+            "w": 75
+          },
+          "200": {
+            "w": 150,
+            "h": 200
+          },
+          "400": {
+            "h": 400,
+            "w": 300
+          },
+          "full": {
+            "w": 1500,
+            "h": 2000
+          }
+        },
+        "white_magic": null,
+        "y2": -1,
+        "y1": -1,
+        "rev": "3",
+        "x2": -1,
+        "angle": 0,
+        "imgid": "1",
+        "geometry": "0x0--5--5"
+      }
+    },
+    "nucleotides_prev_tags": [],
+    "creator": "openfoodfacts-contributors",
+    "generic_name_fr": "",
+    "nova_group_tags": [
+      "not-applicable"
+    ],
+    "categories_prev_tags": [],
+    "traces_hierarchy": [],
+    "product_name": "",
+    "last_modified_by": "sebleouf",
+    "lang_debug_tags": [],
+    "categories_tags": [],
+    "categories": "",
+    "quantity": "",
+    "additives_old_tags": [],
+    "additives_tags": [],
+    "packaging_tags": [],
+    "nutrition_data_prepared_per": "serving",
+    "last_image_dates_tags": [
+      "2017-11-29",
+      "2017-11",
+      "2017"
+    ],
+    "traces": "",
+    "code": "20164294",
+    "languages": {
+      "en:french": 1
+    },
+    "product_name_fr": "",
+    "emb_codes_tags": [],
+    "brands": "",
+    "generic_name_fr_debug_tags": [],
+    "countries_tags": [
+      "en:france"
+    ],
+    "labels_tags": [],
+    "_keywords": [],
+    "correctors_tags": [
+      "sebleouf"
+    ],
+    "amino_acids_tags": [],
+    "allergens": "",
+    "labels": "",
+    "allergens_tags": [],
+    "packaging_debug_tags": [],
+    "emb_codes": "",
+    "created_t": 1511943640,
+    "additives_original_tags": [],
+    "pnns_groups_1": "unknown",
+    "lang": "fr",
+    "last_editor": "sebleouf",
+    "allergens_from_user": "(fr)",
+    "rev": 5,
+    "serving_size": "",
+    "sortkey": 542566911,
+    "nutrition_data": "on",
+    "max_imgid": "2",
+    "manufacturing_places_tags": [],
+    "countries": "France",
+    "allergens_hierarchy": [],
+    "nutrition_score_debug": "no score when the product does not have a category",
+    "countries_debug_tags": [],
+    "countries_hierarchy": [
+      "en:france"
+    ],
+    "languages_tags": [
+      "en:french",
+      "en:1"
+    ],
+    "ingredients_text_debug": "",
+    "brands_debug_tags": [],
+    "nutrition_grades_tags": [
+      "not-applicable"
+    ],
+    "emb_codes_orig": "",
+    "labels_prev_tags": [],
+    "interface_version_created": "20120622",
+    "ingredients_text_with_allergens_fr": "",
+    "expiration_date": "",
+  }

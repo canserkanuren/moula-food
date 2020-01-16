@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,6 +6,12 @@ import { bindActionCreators } from 'redux';
 import { initShoppingList, clearShoppingList, delFromShoppingList } from '../redux/actions/shoppingActions';
 
 class FavoritesScreen extends Component {
+  
+  static navigationOptions = (e) => {
+    return {
+      title: 'Mes favoris'
+    }
+  }
 
   componentDidMount() {
     this.props.shopping.init();

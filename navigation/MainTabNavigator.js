@@ -3,41 +3,118 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SearchScreen from '../screens/SearchScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import ScannerScreen from '../screens/ScannerScreen';
+import DetailsScreen from '../screens/DetailsScreen';
+
+
+const searchNavigator = createStackNavigator(
+  {
+    Search: { screen: SearchScreen },
+    Scanner: { screen: ScannerScreen },
+    Detail: {
+      screen: DetailsScreen,
+      navigationOptions: {
+        title: 'Détail du produit'
+      }
+    }
+  },
+  {
+    initialRouteName: 'Search',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: 'teal',
+        color: 'white'
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
+      }
+    }
+  });
+
+const historyNavigator = createStackNavigator(
+  {
+    History: { screen: HistoryScreen },
+    Scanner: { screen: ScannerScreen }
+  },
+  {
+    initialRouteName: 'History',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
+      }
+    }
+  });
+
+const favoritesNavigator = createStackNavigator(
+  {
+    Favorites: { screen: FavoritesScreen },
+    Scanner: { screen: ScannerScreen }
+  },
+  {
+    initialRouteName: 'Favorites',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      headerBackTitle: 'Retour',
+      headerBackTitleStyle: {
+        color: 'white'
+      }
+    }
+  });
 
 const tabNavigator = createMaterialBottomTabNavigator(
   {
     Search: {
-      screen: SearchScreen,
+      screen: searchNavigator,
       navigationOptions: {
-        tabBarLabel: 'Accueil',
+        tabBarLabel: 'Recherche',
         tabBarIcon: ({ tintColor }) => (
-          <Icon color={tintColor} size={25} name={'ios-home'} />
+          <Icon color={tintColor} size={25} name={'ios-search'} />
         ),
-        barStyle: { backgroundColor: 'black' }
+        barStyle: { backgroundColor: 'teal' }
       }
     },
     History: {
-      screen: HistoryScreen,
+      screen: historyNavigator,
       navigationOptions: {
-        tabBarLabel: 'Paramètres',
+        tabBarLabel: 'Historique',
         tabBarIcon: ({ tintColor }) => (
-          <Icon color={tintColor} size={25} name={'ios-settings'} />
+          <Icon color={tintColor} size={25} name={'ios-clock'} />
         ),
         barStyle: { backgroundColor: 'teal' }
       }
     },
     Favorites: {
-      screen: FavoritesScreen,
+      screen: favoritesNavigator,
       navigationOptions: {
         tabBarLabel: 'Favoris',
         tabBarIcon: ({ tintColor }) => (
           <Icon color={tintColor} size={25} name={'ios-star'} />
         ),
-        barStyle: { backgroundColor: 'teal' }
+        barStyle: { backgroundColor: 'teal' },
       }
     }
   },
