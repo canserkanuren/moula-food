@@ -47,9 +47,9 @@ export default class DetailsScreen extends Component {
         {(
           <>
             <FlatList
-              data={this.state.produit}
-              keyExtractor={item => item}
-              renderItem={({ item }) => <InfoNutrition/>}
+              data={this.state.produit.nutriments}
+              keyExtractor={item => item.name}
+              renderItem={({ item }) => <InfoNutrition item={item}/>}
             />
           </>
         )}
