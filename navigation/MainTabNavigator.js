@@ -11,30 +11,80 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import ScannerScreen from '../screens/ScannerScreen';
 import DetailsScreen from '../screens/DetailsScreen';
 
+
+const searchNavigator = createStackNavigator({
+  Search: { screen: SearchScreen },
+  Scanner: { screen: ScannerScreen },
+  Detail: {
+    screen: DetailsScreen,
+    navigationOptions: {
+      title: 'Détail du produit'
+    }
+  }
+}, {
+  initialRouteName: 'Search',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
+
+const historyNavigator = createStackNavigator({
+  History: { screen: HistoryScreen }
+}, {
+  initialRouteName: 'History',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
+
+const favoritesNavigator = createStackNavigator({
+  Favorites: { screen: FavoritesScreen }
+}, {
+  initialRouteName: 'Favorites',
+  defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: 'teal'
+      },
+      headerTitleStyle: {
+          fontWeight: 'bold'
+      }
+  }
+});
+
 const tabNavigator = createMaterialBottomTabNavigator(
   {
     Search: {
-      screen: SearchScreen,
+      screen: searchNavigator,
       navigationOptions: {
-        tabBarLabel: 'Accueil',
+        tabBarLabel: 'Recherche',
         tabBarIcon: ({ tintColor }) => (
-          <Icon color={tintColor} size={25} name={'ios-home'} />
+          <Icon color={tintColor} size={25} name={'ios-search'} />
         ),
         barStyle: { backgroundColor: 'teal' }
       }
     },
     History: {
-      screen: HistoryScreen,
+      screen: historyNavigator,
       navigationOptions: {
-        tabBarLabel: 'Paramètres',
+        tabBarLabel: 'Historique',
         tabBarIcon: ({ tintColor }) => (
-          <Icon color={tintColor} size={25} name={'ios-settings'} />
+          <Icon color={tintColor} size={25} name={'ios-clock'} />
         ),
         barStyle: { backgroundColor: 'teal' }
       }
     },
     Favorites: {
-      screen: FavoritesScreen,
+      screen: favoritesNavigator,
       navigationOptions: {
         tabBarLabel: 'Favoris',
         tabBarIcon: ({ tintColor }) => (
@@ -49,28 +99,4 @@ const tabNavigator = createMaterialBottomTabNavigator(
   }
 );
 
-
-const rootStack = createStackNavigator(
-  {
-    Main: {
-      screen: tabNavigator
-    },
-    Scanner: {
-      screen: ScannerScreen,
-      navigationOptions: {
-        title: 'Scanner un produit'
-      }
-    },
-    Detail: {
-      screen: DetailsScreen,
-      navigationOptions: {
-        title: 'Détail du produit'
-      }
-    }
-  },
-  {
-    initialRouteName: 'Main'
-  }
-)
-
-export default createAppContainer(rootStack);
+export default createAppContainer(tabNavigator);

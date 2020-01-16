@@ -53,7 +53,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-export default function ScannerScreen(props) {
+function ScannerScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -92,3 +92,10 @@ export default function ScannerScreen(props) {
     </View>
   );
 }
+
+ScannerScreen.navigationOptions = screenProps => ({
+  title: "Scanner un produit"
+});
+
+
+export default ScannerScreen;
