@@ -4,8 +4,10 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addProduct } from '../redux/actions/productsActions';
+import FoodService from '../services/FoodService';
 
 function ScannerScreen(props) {
+  const foodService = new FoodService();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -18,8 +20,9 @@ function ScannerScreen(props) {
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
+    const food = await foodService.get(data);
     await props.products.add(data);
-    props.navigation.navigate('Detail', { codebarre: data });
+    props.navigation.navigate('Detail', { food });
   };
 
   if (hasPermission === null) {
@@ -38,7 +41,7 @@ function ScannerScreen(props) {
         justifyContent: 'flex-end',
       }}>
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
         onTouchEndCapture={handleBarCodeScanned}
       />

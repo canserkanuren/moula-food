@@ -8,6 +8,10 @@ export default class ProductCard extends Component {
   static propTypes = {
     product: PropTypes.object
   };
+  
+  componentDidMount() {
+    
+  }
 
   render() {
     const productBarcode = this.props.product.barcode;

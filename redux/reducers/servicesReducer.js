@@ -1,9 +1,9 @@
-import OpenFFService from "../../services/OpenFFService";
+import FoodService from "../../services/FoodService";
 
 const INITIAL_STATE = {
-  openFFService: new OpenFFService()
-}
+  foodService: new FoodService()
+};
 
 export default (state = INITIAL_STATE, actions) => {
   return state;
-}
+};

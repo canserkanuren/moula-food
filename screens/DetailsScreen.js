@@ -9,12 +9,9 @@ export default class DetailsScreen extends Component {
   foodService = new FoodService();
 
   componentDidMount() {
-    if (this.props.navigation.state.params.codebarre) {
-      this.foodService.get(this.props.navigation.state.params.codebarre)
-      .then((data) => {
-        console.log(data);
-          this.setState({ produit: data, imageUrl: data.nutriscore ? nutriscore(data.nutriscore): '', novaScore: data.novaGroup ? novascore(data.novaGroup): ''});
-        })
+    const { food } = this.props.navigation.state.params;
+    if (food) {
+      this.setState({ produit: food, imageUrl: food.nutriscore ? nutriscore(food.nutriscore): '', novaScore: food.novaGroup ? novascore(food.novaGroup): ''});
     }
   }
 
