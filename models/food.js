@@ -1,6 +1,7 @@
 export class Food {
   constructor(model = {}) {
     if (model) {
+      this.barcode = model.code;
       this.name = model.product.product_name || model.product_name_fr;
       this.brands = model.product.brands;
       this.nutriscore = model.product.nutriscore_grade;

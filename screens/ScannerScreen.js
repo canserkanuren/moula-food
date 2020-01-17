@@ -3,8 +3,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addProduct } from '../redux/actions/productsActions';
 import FoodService from '../services/FoodService';
+import { addToHistoryScanList } from '../redux/actions/historyActions';
 
 function ScannerScreen(props) {
   const foodService = new FoodService();
@@ -61,7 +61,7 @@ ScannerScreen.navigationOptions = (e) => {
 mapActionsToProps = (barcode) => {
   return {
     products: {
-      add: bindActionCreators(addProduct, barcode)
+      add: bindActionCreators(addToHistoryScanList, barcode)
     }
   }
 }
