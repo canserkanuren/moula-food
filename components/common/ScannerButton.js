@@ -19,10 +19,11 @@ export default class ScannerButton extends Component {
         {/* Rest of the app comes ABOVE the action button component !*/}
         {this.props.children}
         <ActionButton
-          buttonColor="rgba(231,76,60,1)"
+          buttonColor="#EFEFEF"
           title="Open Scanner"
           onPress={this.openScanner}
-          renderIcon={() => (<Icon name="md-camera" />)}>
+          style={{ flex: 1 }}
+          renderIcon={() => (<Icon name="ios-barcode" size={25} style={{ paddingTop: 3 }} />)}>
         </ActionButton>
       </View>
     );
