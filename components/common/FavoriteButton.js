@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
-import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default class ScannerButton extends Component {
-  static propTypes = {
-    navigation: PropTypes.object
-  };
+export default class FavoriteButton extends Component {
+
+  state = { fav: false }
 
   openScanner = () => {
-    this.props.navigation.navigate('Scanner');
-  };
+    this.setState({ fav: !this.state.fav});
+  }
 
   render() {
     return (
@@ -22,10 +20,13 @@ export default class ScannerButton extends Component {
           buttonColor="#EFEFEF"
           title="Open Scanner"
           onPress={this.openScanner}
-          style={{ flex: 1 }}
-          renderIcon={() => (<Icon name="ios-barcode" size={25} style={{ paddingTop: 3 }} />)}>
+          renderIcon={() => (<Icon raised
+            style={{ paddingTop: 4}}
+            name =  { this.state.fav ? 'ios-heart' : 'ios-heart-empty' }
+            size={30}
+            color="#E63950" />)}>
         </ActionButton>
       </View>
-    );
+    )
   }
 }

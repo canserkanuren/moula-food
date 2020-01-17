@@ -6,7 +6,7 @@ import historyStyle from '../../assets/styles/historyStyle.js';
 
 export default class ProductCard extends Component {
   static propTypes = {
-    product: PropTypes.object
+    product: PropTypes.string
   };
   
   componentDidMount() {
@@ -29,8 +29,8 @@ export default class ProductCard extends Component {
           }}
         />
         <Text style={historyStyle.itemName}> {productName} </Text>
-        <Text style={historyStyle.itemBrand}> {productBrand} </Text>
-        <Text style={historyStyle.itemQuality}> {productQuality} </Text>
+        {/* <Text style={historyStyle.itemBrand}> {productBrand} </Text> */}
+        {/* <Text style={historyStyle.itemQuality}> {productQuality} </Text> */}
       </View>
     );
   }
