@@ -4,6 +4,9 @@ import FoodService from '../services/FoodService'
 import { nutriscore, novascore } from '../constant/constant';
 import InfoNutrition from '../components/common/InfoNutrition';
 import ShareButton from '../components/common/ShareButton';
+import ZoomImage from 'react-native-zoom-image';
+import {Easing} from 'react-native'; 
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default class DetailsScreen extends Component {
   static navigationOptions = (e) => {
@@ -27,11 +30,16 @@ export default class DetailsScreen extends Component {
 
   render() {
     return (
+      <FavoriteButton>
       <View style={Styles.container}>
         <View style={Styles.row}>
-          <Image
-            style={Styles.imageProduit}
+          <ZoomImage
             source={{ uri: this.state.produit.imageUrl }}
+            imgStyle={{width: 90, height: 130}}
+            style={{ marginRight: 5}}
+            duration={200}
+            enableScaling={false}
+            easingFunc={Easing.ease}
           />
           <View>
             <Text style={Styles.title}>{this.state.produit.name}</Text>
@@ -54,16 +62,21 @@ export default class DetailsScreen extends Component {
               />) : (<></>)
           }
         </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold'}}>Qualités</Text>
+          <Text style={{ fontSize: 20}}>pour {this.state.produit.nutritionPer}</Text>
+        </View>
         {(
           <>
             <FlatList
-              data={this.state.produit}
-              keyExtractor={item => item}
-              renderItem={({ item }) => <InfoNutrition />}
+              data={this.state.produit.nutriments}
+              keyExtractor={item => item.name}
+              renderItem={({ item }) => <InfoNutrition item={item}/>}
             />
           </>
         )}
       </View>
+      </FavoriteButton>
     )
   }
 }
