@@ -3,6 +3,9 @@ import { View, Text, Image, StyleSheet, FlatList } from 'react-native'
 import FoodService from '../services/FoodService'
 import { nutriscore, novascore } from '../constant/constant';
 import InfoNutrition from '../components/common/InfoNutrition';
+import ZoomImage from 'react-native-zoom-image';
+import {Easing} from 'react-native'; 
+import FavoriteButton from '../components/common/FavoriteButton';
 
 export default class DetailsScreen extends Component {
   state = { produit: {}, imageUrl: '' }
@@ -17,11 +20,16 @@ export default class DetailsScreen extends Component {
 
   render() {
     return (
+      <FavoriteButton>
       <View style={Styles.container}>
         <View style={Styles.row}>
-          <Image
-            style={Styles.imageProduit}
+          <ZoomImage
             source={{ uri: this.state.produit.imageUrl }}
+            imgStyle={{width: 90, height: 130}}
+            style={{ marginRight: 5}}
+            duration={200}
+            enableScaling={false}
+            easingFunc={Easing.ease}
           />
           <View>
             <Text style={Styles.title}>{this.state.produit.name}</Text>
@@ -54,6 +62,7 @@ export default class DetailsScreen extends Component {
           </>
         )}
       </View>
+      </FavoriteButton>
     )
   }
 }
