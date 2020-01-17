@@ -8,30 +8,20 @@ export default class ShareButton extends Component {
     food: PropTypes.object.isRequired
   };
 
-  onShare = async () => {
+  onShare = async () => { 
     const { food } = this.props;
-    console.log('url', Linking.makeUrl('', { barcode: food.code }));
+    const url = `${Linking.makeUrl('')}?barcode=${food.barcode}`;
     try {
-      const result = await Share.share({
+      await Share.share({
         title: food.name,
-        url: Linking.makeUrl('', { barcode: food.code })
-      }, );
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
+        url
+      });
     } catch (error) {
       alert(error.message);
     }
   };
 
   render() {
-    return <Button onPress={this.onShare} title='Share' color={'white'}/>;
+    return (<Button onPress={this.onShare} title='Share' color={'white'}/>);
   }
 }

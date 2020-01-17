@@ -52,7 +52,9 @@ export const clearHistorySearchList = () => {
 export const addToHistorySearchList = (barcode) => {
   return async (dispatch) => {
     const products = JSON.parse(await AsyncStorage.getItem(HISTORY_SEARCH_LOCAL_STORAGE)) || [];
-    if (products.length == 10) products.shift()
+    if (products.length == 10) {
+      products.shift();
+    }
     products.push(barcode);
     await AsyncStorage.setItem(HISTORY_SEARCH_LOCAL_STORAGE, JSON.stringify(products));
     dispatch({
@@ -112,9 +114,13 @@ export const clearHistoryScanList = () => {
 export const addToHistoryScanList = (barcode) => {
   return async (dispatch) => {
     const products = JSON.parse(await AsyncStorage.getItem(HISTORY_SCAN_LOCAL_STORAGE)) || [];
-    products.push(barcode);
-    if (products.length == 10) products.shift()
-    await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
+    if (!products.includes(barcode)) {
+      if (products.length == 10) {
+        products.shift();
+      }
+      products.push(barcode);
+      await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
+    }
     dispatch({
       type: HISTORY_SCAN_ADD,
       payload: products

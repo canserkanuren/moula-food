@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, View, Image, Text } from 'react-native';
+import { SafeAreaView, ScrollView, View, Image, Text, AsyncStorage } from 'react-native';
 import ProductCard from '../components/common/ProductCard.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,10 +21,9 @@ class HistoryScreen extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.history.scanned.init();
     this.setState({ historyProducts: this.props.products.scanned.concat(this.props.products.searched) });
-    console.log('this.props.products.scanned.concat(this.props.products.searched)', this.props.products.scanned.concat(this.props.products.searched));
   }
 
   render() {
