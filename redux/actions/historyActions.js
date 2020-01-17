@@ -1,4 +1,8 @@
 import { AsyncStorage } from 'react-native';
+import FoodService from '../../services/FoodService';
+
+
+let foodService = new FoodService();
 
 // HISTORY_SCAN
 export const HISTORY_SCAN_MAX = 10;
@@ -19,14 +23,13 @@ export const HISTORY_SEARCH_DEL = "HISTORY_SEARCH_DEL";
 // Initialisation de la liste des historiques recherchés
 export const initHistorySearchList = () => {
   return async (dispatch) => {
-    const barcodesToShop  = JSON.parse(await AsyncStorage.getItem(HISTORY_SEARCH_LOCAL_STORAGE)) || [];
-    if (barcodesToShop.length > 0 ) {
+    const barcodesToShop = JSON.parse(await AsyncStorage.getItem(HISTORY_SEARCH_LOCAL_STORAGE)) || [];
+    if (barcodesToShop.length > 0) {
       var productsToShop = [];
-      barcodesToShop.forEach(barcode => {
-        // TODO : barcode => Service getProductInfo
-        product = barcode || null;
-        if (product != null ) productsToShop.push(product);
-      });
+      for (let index = 0; index < barcodesToShop.length; index++) {
+        product = foodService.get(barcodesToShop[index]) || null;
+        if (product != null) productsToShop.push(product);
+      }
     } else {
       const productsToShop = [];
     }
@@ -77,19 +80,17 @@ export const delFromHistorySearchList = (barcode) => {
 }
 
 // Initialisation de la liste des historiques recherchés
-export const initHistoryScanList = () => {
+export const initHistoryScanList =  () => {
+    
   return async (dispatch) => {
-    const barcodesToShop  = JSON.parse(await AsyncStorage.getItem(HISTORY_SCAN_LOCAL_STORAGE)) || [];
-    if (barcodesToShop.length > 0 ) {
-      var productsToShop = [];
-      barcodesToShop.forEach(barcode => {
-        // TODO : barcode => Service getProductInfo
-        product = barcode || null;
-        if (product != null ) productsToShop.push(product);
-      });
-    } else {
-      const productsToShop = [];
-    }
+    const barcodesToShop = JSON.parse(await AsyncStorage.getItem(HISTORY_SCAN_LOCAL_STORAGE)) || [];
+    var productsToShop = [];
+    if (barcodesToShop.length > 0) {
+      for (let index = 0; index < barcodesToShop.length; index++) { 
+        product = await foodService.get(barcodesToShop[index]) || null;
+        if (product != null) productsToShop.push(product);
+      }
+    } 
     dispatch({
       type: HISTORY_SCAN_ALL,
       payload: productsToShop
@@ -112,9 +113,13 @@ export const clearHistoryScanList = () => {
 export const addToHistoryScanList = (barcode) => {
   return async (dispatch) => {
     const products = JSON.parse(await AsyncStorage.getItem(HISTORY_SCAN_LOCAL_STORAGE)) || [];
-    products.push(barcode);
-    if (products.length == 10) products.shift()
-    await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
+    if (!products.includes(barcode)) {
+      if (products.length == 10) {
+        products.shift();
+      }
+      products.push(barcode);
+      await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
+    }
     dispatch({
       type: HISTORY_SCAN_ADD,
       payload: products

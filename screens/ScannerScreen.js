@@ -1,70 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addProduct } from '../redux/actions/productsActions';
+import { addToHistoryScanList } from '../redux/actions/historyActions';
 import FoodService from '../services/FoodService';
 
-function ScannerScreen(props) {
-  const foodService = new FoodService();
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
+class ScannerScreen extends Component {
+  foodService = new FoodService();
+  static navigationOptions = (e) => {
+    return {
+      title: 'Scanner un produit',
+      headerTitleStyle: {
+        color: 'white'
+      }
+    }
+  }
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+  state = { granted: false, scanned: false }
 
-  const handleBarCodeScanned = async ({ type, data }) => {
-    setScanned(true);
-    const food = await foodService.get(data);
-    await props.products.add(data);
-    props.navigation.navigate('Detail', { food });
+  async componentDidMount() {
+    const { status } = await BarCodeScanner.requestPermissionsAsync();
+    this.setState({ granted: status });
+  }
+
+  handleBarCodeScanned = async ({ type, data }) => {
+
+    // 32 => Android
+    // org.gs1.EAN-13 => iOS
+    if (type === 'org.gs1.EAN-13' || type === 32) {
+      this.setState({ scanned: true })
+      if (this.state.scanned == true) {
+        const food = await this.foodService.get(data);
+        await this.props.products.add(data);
+        this.props.navigation.navigate('Detail', { food });
+      }
+    }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
-
-  return (
-    <View
-      style={{
+  render() {
+    return (
+      <View style={{
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-end',
       }}>
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-        onTouchEndCapture={handleBarCodeScanned}
-      />
-    </View>
-  );
-}
-
-ScannerScreen.navigationOptions = (e) => {
-  return {
-    title: 'Scanner un produit',
-    headerTitleStyle: {
-      color: 'white'
-    }
+        {!this.state.granted ? (
+          <Text>Veuillez activer l'accès à la caméra.</Text>
+        ) : (
+            <BarCodeScanner
+              onBarCodeScanned={this.handleBarCodeScanned}
+              style={StyleSheet.absoluteFillObject}
+            />
+          )}
+      </View>
+    );
   }
 }
 
 mapActionsToProps = (barcode) => {
   return {
     products: {
-      add: bindActionCreators(addProduct, barcode)
+      add: bindActionCreators(addToHistoryScanList, barcode)
     }
   }
 }
-
 
 export default connect(null, mapActionsToProps)(ScannerScreen);

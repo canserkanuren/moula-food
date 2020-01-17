@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, View, Image, Text } from 'react-native';
+import { SafeAreaView, ScrollView, View, Image, Text, AsyncStorage } from 'react-native';
 import ProductCard from '../components/common/ProductCard.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,9 +21,16 @@ class HistoryScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.history.scanned.init();
+  componentDidUpdate() {
+    // TODO --> factoriser avec DidMount
+    // TODO + vérifier que l'élement n'a pas déjà été chargé dans redux
+    // this.props.history.scanned.init();
+  }
+
+  componentDidMount= async () => {
+    await this.props.history.scanned.init();
     this.setState({ historyProducts: this.props.products.scanned.concat(this.props.products.searched) });
+    console.log(this.props.products)
   }
 
   render() {
@@ -36,7 +43,7 @@ class HistoryScreen extends Component {
                 <ScrollView style={historyStyle.scrollView}>
                   <View style={historyStyle.flexContainer}>
                     {
-                      historyProducts.map((item, key) =>
+                      this.state.historyProducts.map((item, key) =>
                         <ProductCard product={item} key={item.barcode} />
                       )
                     }

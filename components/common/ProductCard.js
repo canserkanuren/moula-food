@@ -16,15 +16,16 @@ export default class ProductCard extends Component {
   render() {
     const productBarcode = this.props.product.barcode;
     const productName = this.props.product.name || '';
-    const productBrand = this.props.product.brand || '';
-    const productQuality = this.props.product.quality || '';
+    const productBrand = this.props.product.brands || '';
+    const productQuality = this.props.product.nutriscore || '';
+    const productImage = this.props.product.imageUrl || '';
 
     return (
       <View style={historyStyle.itemCard}>
         <Image
           style={historyStyle.itemImage}
           source={{
-            uri: 'https://static.openfoodfacts.org/images/products/325/622/351/0032/front_fr.29.full.jpg'
+            uri: `${productImage}`
           }}
         />
         <Text style={historyStyle.itemName}> {productName} </Text>
