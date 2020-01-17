@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class FavoriteButton extends Component {
 
-  state = { fav: true }
+  state = { fav: false }
 
   openScanner = () => {
     this.setState({ fav: !this.state.fav});

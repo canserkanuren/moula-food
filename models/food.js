@@ -6,6 +6,7 @@ export class Food {
       this.nutriscore = model.product.nutriscore_grade;
       this.imageUrl = model.product.image_url;
       this.novaGroup = model.product.nova_group;
+      this.nutritionPer = model.product.nutrition_data_per;
       this.nutriments = []
       if (model.product.nutriments.energy_value) {
         this.nutriments.push({

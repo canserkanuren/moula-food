@@ -52,6 +52,10 @@ export default class DetailsScreen extends Component {
           />) : (<></>)
         }
         </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Text style={{ fontSize: 30, fontWeight: 'bold'}}>Qualités</Text>
+          <Text style={{ fontSize: 20}}>pour {this.state.produit.nutritionPer}</Text>
+        </View>
         {(
           <>
             <FlatList
