@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToHistoryScanList } from '../redux/actions/historyActions';
 import FoodService from '../services/FoodService';
-import { addToHistoryScanList } from '../redux/actions/historyActions';
 
 class ScannerScreen extends Component {
   foodService = new FoodService();

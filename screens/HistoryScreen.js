@@ -27,10 +27,15 @@ class HistoryScreen extends Component {
     // this.props.history.scanned.init();
   }
 
-  componentDidMount= async () => {
+  componentDidMount = async () => {
     await this.props.history.scanned.init();
-    this.setState({ historyProducts: this.props.products.scanned.concat(this.props.products.searched) });
-    console.log(this.props.products)
+    const scanned = this.props.products.scanned;
+
+    await this.props.history.searched.init();
+    const searched = this.props.products.searched
+
+    const historyProducts = scanned.concat(searched);
+    this.setState({ historyProducts: historyProducts });
   }
 
   render() {
