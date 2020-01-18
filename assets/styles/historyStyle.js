@@ -28,7 +28,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
     elevation: 2,
-    maxWidth: Math.round((Dimensions.get('window').width) / 2)
+    maxWidth: Math.round(((Dimensions.get('window').width) / 2) - 42)
   },
   itemImage: {
     width: 150,
