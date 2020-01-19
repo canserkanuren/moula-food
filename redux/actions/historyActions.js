@@ -27,7 +27,7 @@ export const initHistorySearchList = () => {
     var productsToShop = [];
 
     for (let index = 0; index < barcodesToShop.length; index++) {
-      product = foodService.get(barcodesToShop[index]) || null;
+      product = await foodService.get(barcodesToShop[index]) || null;
       if (product != null) productsToShop.push(product);
     }
     dispatch({

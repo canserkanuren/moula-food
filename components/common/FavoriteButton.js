@@ -2,13 +2,37 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 
-export default class FavoriteButton extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+class FavoriteButton extends Component {
 
   state = { fav: false }
 
-  openScanner = () => {
-    this.setState({ fav: !this.state.fav});
+  static propTypes = {
+    product: PropTypes.object,
+    addFunc: PropTypes.func,
+    rmvFunc: PropTypes.func
+  };
+
+  changeState = () => {
+
+    if (this.state.fav == true) {
+      this.props.rmvFunc(this.props.product);
+    } else {
+      this.props.addFunc(this.props.product);
+    }
+
+    this.setState({ fav: !this.state.fav });
+  }
+
+  componentDidMount = async () => {
+
+    console.log(this.props.shoppingProducts);
+    console.log(this.props.product);
+    this.setState({ fav: this.props.shoppingProducts.includes(this.props.product.barcode) });
   }
 
   render() {
@@ -19,10 +43,10 @@ export default class FavoriteButton extends Component {
         <ActionButton
           buttonColor="#EFEFEF"
           title="Open Scanner"
-          onPress={this.openScanner}
+          onPress={this.changeState}
           renderIcon={() => (<Icon raised
-            style={{ paddingTop: 4}}
-            name =  { this.state.fav ? 'ios-heart' : 'ios-heart-empty' }
+            style={{ paddingTop: 4 }}
+            name={this.state.fav ? 'ios-heart' : 'ios-heart-empty'}
             size={30}
             color="#E63950" />)}>
         </ActionButton>
@@ -30,3 +54,19 @@ export default class FavoriteButton extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (stateStore) => {
+  return {
+    shoppingProducts: stateStore.products.shopping.shoppingProducts,
+  }
+}
+
+const mapActionsToProps = (barcode) => {
+  return {
+    shopping: {}
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(FavoriteButton);
+

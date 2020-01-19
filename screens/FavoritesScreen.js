@@ -1,25 +1,62 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, SafeAreaView, ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { initShoppingList, clearShoppingList, delFromShoppingList } from '../redux/actions/shoppingActions';
+import { initShoppingList, clearShoppingList, addToShoppingList, delFromShoppingList } from '../redux/actions/shoppingActions';
+import ProductListItem from '../components/common/ProductListItem';
+
+import historyStyle from '../assets/styles/historyStyle';
+
 
 class FavoritesScreen extends Component {
-  
+
   static navigationOptions = (e) => {
     return {
       title: 'Mes favoris'
     }
   }
 
-  componentDidMount() {
-    this.props.shopping.init();
+  navigateToDetails = (product) => {
+    this.props.navigation.navigate('Detail', { food: product });
+  }
+
+  removeFromShoppingList = (product) => {
+    this.props.shopping.remove(product.barcode);
+  }
+
+  componentDidMount = async () => {
+    await this.props.shopping.init();
+    // console.log(this.props.shoppingProducts)
   }
 
   render() {
     return (
-      <Text>FavoritesScreen</Text>
+      <SafeAreaView style={historyStyle.container}>
+        {this.props.shoppingProducts ? (
+          <View>
+            {
+              this.props.shoppingProducts.length > 0 ? (
+                <ScrollView style={historyStyle.scrollView}>
+                  <View style={historyStyle.flexContainer}>
+                    {
+                      this.props.shoppingProducts.map((item, key) => 
+                        <ProductListItem product={item} key={item.barcode} swippedPressFunc={this.removeFromShoppingList} pressFunc={this.navigateToDetails} />
+                      )
+                    }
+                  </View>
+                </ScrollView>
+              ) : (
+                  <Text>Aucun produit en favoris</Text>
+                )}
+          </View>
+        ) : (
+            // TODO : A Remplacer par un spinner
+            <Text style={historyStyle.flexContainer}>
+              Spinner
+            </Text>
+          )}
+      </SafeAreaView >
     )
   }
 }
