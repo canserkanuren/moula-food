@@ -77,17 +77,17 @@ export const delFromHistorySearchList = (barcode) => {
 }
 
 // Initialisation de la liste des historiques recherchés
-export const initHistoryScanList =  () => {
-    
+export const initHistoryScanList = () => {
+
   return async (dispatch) => {
     const barcodesToShop = JSON.parse(await AsyncStorage.getItem(HISTORY_SCAN_LOCAL_STORAGE)) || [];
     var productsToShop = [];
     if (barcodesToShop.length > 0) {
-      for (let index = 0; index < barcodesToShop.length; index++) { 
+      for (let index = 0; index < barcodesToShop.length; index++) {
         product = await foodService.get(barcodesToShop[index]) || null;
         if (product != null) productsToShop.push(product);
       }
-    } 
+    }
     dispatch({
       type: HISTORY_SCAN_ALL,
       payload: productsToShop
@@ -117,9 +117,16 @@ export const addToHistoryScanList = (barcode) => {
       products.push(barcode);
       await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
     }
+
+    productsToShop = [];
+    for (let index = 0; index < products.length; index++) {
+      product = await foodService.get(products[index]) || null;
+      if (product != null) productsToShop.push(product);
+    }
+    
     dispatch({
       type: HISTORY_SCAN_ADD,
-      payload: products
+      payload: productsToShop
     });
   };
 }
@@ -131,9 +138,16 @@ export const delFromHistoryScanList = (barcode) => {
     const index = products.indexOf(barcode);
     products.splice(index, 1);
     await AsyncStorage.setItem(HISTORY_SCAN_LOCAL_STORAGE, JSON.stringify(products));
+
+    productsToShop = [];
+    for (let index = 0; index < products.length; index++) {
+      product = await foodService.get(products[index]) || null;
+      if (product != null) productsToShop.push(product);
+    }
+
     dispatch({
       type: HISTORY_SCAN_DEL,
-      payload: products
+      payload: productsToShop
     });
   };
 }
