@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import historyStyle from '../../assets/styles/historyStyle.js';
 
 export default class ProductCard extends Component {
+
   static propTypes = {
     product: PropTypes.object,
     pressFunc: PropTypes.func
