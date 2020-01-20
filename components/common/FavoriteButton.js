@@ -17,22 +17,18 @@ class FavoriteButton extends Component {
     rmvFunc: PropTypes.func
   };
 
-  changeState = () => {
+  changeState = async (product) => {
 
     if (this.state.fav == true) {
-      this.props.rmvFunc(this.props.product);
+      await this.props.rmvFunc(product); 
     } else {
-      this.props.addFunc(this.props.product);
+      await this.props.addFunc(product);
     }
-
     this.setState({ fav: !this.state.fav });
   }
 
   componentDidMount = async () => {
-
-    console.log(this.props.shoppingProducts);
-    console.log(this.props.product);
-    this.setState({ fav: this.props.shoppingProducts.includes(this.props.product.barcode) });
+    await this.setState({ fav: this.props.shoppingProducts.includes(this.props.product) });
   }
 
   render() {
@@ -43,7 +39,7 @@ class FavoriteButton extends Component {
         <ActionButton
           buttonColor="#EFEFEF"
           title="Open Scanner"
-          onPress={this.changeState}
+          onPress={() => this.changeState(this.props.product)}
           renderIcon={() => (<Icon raised
             style={{ paddingTop: 4 }}
             name={this.state.fav ? 'ios-heart' : 'ios-heart-empty'}

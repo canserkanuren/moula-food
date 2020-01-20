@@ -27,19 +27,18 @@ class DetailsScreen extends Component {
   foodService = new FoodService();
 
   addToShoppingList = (product) => {
+    console.log(`add ${product.barcode}`);
     this.props.shopping.add(product.barcode);
   }
 
   rmvFromShoppingList = (product) => {
+    console.log(`rmv ${product.barcode}`);
     this.props.shopping.remove(product.barcode);
-  }
-
-  initStateOfShopping = (product) => {
-    this.props.shopping.state(product.barcode);
   }
 
   componentDidMount() {
     const { food } = this.props.navigation.state.params;
+
     if (food) {
       this.setState({ produit: food, imageUrl: food.nutriscore ? nutriscore(food.nutriscore) : '', novaScore: food.novaGroup ? novascore(food.novaGroup) : '' });
     }
@@ -47,7 +46,7 @@ class DetailsScreen extends Component {
 
   render() {
     return (
-      <FavoriteButton product={this.state.produit} addFunc={this.addToShoppingList} rmvFunc={this.rmvFromShoppingList}>
+      <FavoriteButton product={this.props.navigation.state.params.food} addFunc={this.addToShoppingList} rmvFunc={this.rmvFromShoppingList}>
         <View style={Styles.container}>
           <View style={Styles.row}>
             <ZoomImage
