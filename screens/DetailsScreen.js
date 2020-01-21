@@ -26,9 +26,10 @@ class DetailsScreen extends Component {
   state = { produit: {}, imageUrl: '' }
   foodService = new FoodService();
 
-  addToShoppingList = (product) => {
+  addToShoppingList = async (product) => {
     console.log(`add ${product.barcode}`);
-    this.props.shopping.add(product.barcode);
+    await this.props.shopping.add(product.barcode);
+    console.log(this.props.shoppingProducts);
   }
 
   rmvFromShoppingList = (product) => {

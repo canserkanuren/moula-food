@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, SafeAreaView, ScrollView, View, AsyncStorage } from 'react-native';
+import { Text, SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Loading from '../components/common/Loading';
@@ -23,36 +23,37 @@ class FavoritesScreen extends Component {
   }
 
   removeFromShoppingList = (product) => {
-    this.props.shopping.remove(product.barcode);
+    console.log('suppresion de larticle');
+    console.log(product);
+    
+    this.props.shopping.remove(product);
   }
 
   componentDidMount = async () => {
     await this.props.shopping.init();
-    // console.log(this.props.shoppingProducts)
+
+    console.log(this.props.shoppingProducts)
   }
 
   render() {
+
+
     return (
       <SafeAreaView style={historyStyle.container}>
         {this.props.shoppingProducts ? (
-          <View>
-            {
-              this.props.shoppingProducts.length > 0 ? (
-                <ScrollView style={historyStyle.scrollView}>
-                  <View style={historyStyle.flexContainer}>
-                    {
-                      this.props.shoppingProducts.map((item, key) => 
-                        <ProductListItem product={item} key={item.barcode} swippedPressFunc={this.removeFromShoppingList} pressFunc={this.navigateToDetails} />
-                      )
-                    }
-                  </View>
-                </ScrollView>
-              ) : (
-                  <Text>Aucun produit en favoris</Text>
-                )}
-          </View>
-        ) : ( 
-          <Loading displayColor="teal"/>
+          <>
+            {this.props.shoppingProducts.length > 0 ? (
+              <FlatList
+                data={this.props.shoppingProducts}
+                keyExtractor={item => item.barcode}
+                renderItem={({ item }) => <ProductListItem product={item} swippedPressFunc={this.removeFromShoppingList} pressFunc={this.navigateToDetails} />}
+              />
+            ) : (
+                <Text>Aucun produit en favoris</Text>
+              )}
+          </>
+        ) : (
+            <Loading displayColor="teal" />
           )}
       </SafeAreaView >
     )

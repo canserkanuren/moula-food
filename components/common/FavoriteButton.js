@@ -27,7 +27,8 @@ class FavoriteButton extends Component {
     this.setState({ fav: !this.state.fav });
   }
 
-  componentDidMount = async () => {
+   
+  componentWillReceiveProps = async () => {
     await this.setState({ fav: this.props.shoppingProducts.includes(this.props.product) });
   }
 

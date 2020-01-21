@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { MainStyle } from '../../assets/styles/mainStyle';
+import MainStyle from '../../assets/styles/mainStyle';
 
 export default class Loading extends Component {
 
@@ -15,7 +15,7 @@ export default class Loading extends Component {
     render() {
         return (
             <View
-                style={[MainStyle.container], { alignItems: 'center' }}>
+                style={[MainStyle.container, { alignItems: 'center', justifyContent:'center' }]}>
                 <ActivityIndicator
                     size="large"
                     color={this.props.displayColor}

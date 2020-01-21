@@ -24,7 +24,7 @@ export default class ProductListItem extends Component {
       backgroundColor: 'none',
       right: [
         {
-          onPress: this.props.swippedPressFunc,
+          onPress: () => this.props.swippedPressFunc(this.props.product),
           text: 'Retirer',
           type: 'delete'
         }
@@ -32,7 +32,7 @@ export default class ProductListItem extends Component {
     }
 
     return (
-      // <Swipeout {...swipeoutOpts}>
+      <Swipeout {...swipeoutOpts}>
         <TouchableHighlight
           activeOpacity={0.9}
           onPress={() => this.props.pressFunc(this.props.product)}
@@ -60,7 +60,7 @@ export default class ProductListItem extends Component {
             </View>
           </View>
         </TouchableHighlight>
-      // </Swipeout>
+      </Swipeout>
     )
   }
 }
