@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, SafeAreaView, ScrollView, View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Loading from '../components/common/Loading';
 
 import { initShoppingList, clearShoppingList, addToShoppingList, delFromShoppingList } from '../redux/actions/shoppingActions';
 import ProductListItem from '../components/common/ProductListItem';
@@ -50,11 +51,8 @@ class FavoritesScreen extends Component {
                   <Text>Aucun produit en favoris</Text>
                 )}
           </View>
-        ) : (
-            // TODO : A Remplacer par un spinner
-            <Text style={historyStyle.flexContainer}>
-              Spinner
-            </Text>
+        ) : ( 
+          <Loading displayColor="teal"/>
           )}
       </SafeAreaView >
     )

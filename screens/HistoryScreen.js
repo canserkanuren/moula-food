@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, View, Image, Text, AsyncStorage } from 'react
 import ProductCard from '../components/common/ProductCard.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Loading from '../components/common/Loading';
 
 import { initHistorySearchList, clearHistorySearchList, delFromHistorySearchList } from '../redux/actions/historyActions';
 import { initHistoryScanList, clearHistoryScanList, delFromHistoryScanList } from '../redux/actions/historyActions';
@@ -92,10 +93,7 @@ class HistoryScreen extends Component {
                 )}
           </View>
         ) : (
-            // TODO : A Remplacer par un spinner
-            <Text style={historyStyle.flexContainer}>
-              Spinner
-              </Text>
+            <Loading displayColor="teal" />
           )}
       </SafeAreaView >
     )
