@@ -22,6 +22,6 @@ export default class ShareButton extends Component {
   };
 
   render() {
-    return (<Button onPress={this.onShare} title='Share' color={'white'}/>);
+    return (<Button onPress={this.onShare} title='Partager' color={'white'}/>);
   }
 }
