@@ -43,20 +43,12 @@ export const clearShoppingList = () => {
 export const addToShoppingList = (barcode) => {
   return async (dispatch) => {
     
-    console.log(`barcode: ${barcode}`);
     const products = JSON.parse(await AsyncStorage.getItem(SHOPPING_LOCAL_STORAGE)) || [];
-    
     if (!products.includes(barcode)) products.push(barcode);
-    
-    console.log(`products: ${products}`);
-    
     await AsyncStorage.setItem(SHOPPING_LOCAL_STORAGE, JSON.stringify(products));
-
     productsToShop = [];
     for (let index = 0; index < products.length; index++) {
-      console.log(`product barcode : ${products[index]}`);
       productObj = await foodService.get(products[index]) || null;
-      console.log(productObj);
       if (product != null) productsToShop.push(productObj);
     }
 
