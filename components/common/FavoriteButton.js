@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PropTypes from 'prop-types';
+import PropTypes, { array } from 'prop-types';
+import { initShoppingList } from '../../redux/actions/shoppingActions';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,16 +21,18 @@ class FavoriteButton extends Component {
   changeState = async (product) => {
 
     if (this.state.fav == true) {
-      await this.props.rmvFunc(product); 
+      await this.props.rmvFunc(product);
     } else {
       await this.props.addFunc(product);
     }
     this.setState({ fav: !this.state.fav });
   }
 
-   
-  componentWillReceiveProps = async () => {
-    await this.setState({ fav: this.props.shoppingProducts.includes(this.props.product) });
+  componentDidMount = async () => {
+    await this.props.shopping.init();
+    const findState = !!this.props.shoppingProducts.find(element => element.barcode === this.props.product.barcode);
+
+    this.setState({ fav: findState });
   }
 
   render() {
@@ -61,7 +64,9 @@ const mapStateToProps = (stateStore) => {
 
 const mapActionsToProps = (barcode) => {
   return {
-    shopping: {}
+    shopping: {
+      init: bindActionCreators(initShoppingList, barcode),
+    }
   }
 }
 
