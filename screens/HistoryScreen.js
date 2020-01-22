@@ -9,6 +9,7 @@ import { initHistorySearchList, clearHistorySearchList, delFromHistorySearchList
 import { initHistoryScanList, clearHistoryScanList, delFromHistoryScanList } from '../redux/actions/historyActions';
 
 import historyStyle from '../assets/styles/historyStyle';
+import ScannerButton from '../components/common/ScannerButton';
 
 class HistoryScreen extends Component {
 
@@ -74,28 +75,30 @@ class HistoryScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={historyStyle.container}>
-        {this.state.historyProducts ? (
-          <View>
-            {
-              this.state.historyProducts.length > 0 ? (
-                <ScrollView style={historyStyle.scrollView}>
-                  <View style={historyStyle.flexContainer}>
-                    {
-                      this.state.historyProducts.map((item, key) =>
-                        <ProductCard product={item} key={item.barcode} pressFunc={this.navigateToDetails} />
-                      )
-                    }
-                  </View>
-                </ScrollView>
-              ) : (
-                  <Text>Aucun historique disponible</Text>
-                )}
-          </View>
-        ) : (
-            <Loading displayColor="teal" />
-          )}
-      </SafeAreaView >
+      <ScannerButton navigation={this.props.navigation}>
+        <SafeAreaView style={historyStyle.container}>
+          {this.state.historyProducts ? (
+            <View>
+              {
+                this.state.historyProducts.length > 0 ? (
+                  <ScrollView style={historyStyle.scrollView}>
+                    <View style={historyStyle.flexContainer}>
+                      {
+                        this.state.historyProducts.map((item, key) =>
+                          <ProductCard product={item} key={item.barcode} pressFunc={this.navigateToDetails} />
+                        )
+                      }
+                    </View>
+                  </ScrollView>
+                ) : (
+                    <Text>Aucun historique disponible</Text>
+                  )}
+            </View>
+          ) : (
+              <Loading displayColor="teal" />
+            )}
+        </SafeAreaView >
+      </ScannerButton>
     )
   }
 }
