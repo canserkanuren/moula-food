@@ -4,10 +4,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToHistoryScanList } from '../redux/actions/historyActions';
-import FoodService from '../services/FoodService';
 
 class ScannerScreen extends Component {
-  foodService = new FoodService();
   static navigationOptions = (e) => {
     return {
       title: 'Scanner un produit',
@@ -28,10 +26,10 @@ class ScannerScreen extends Component {
 
     // 32 => Android
     // org.gs1.EAN-13 => iOS
-    if (type === 'org.gs1.EAN-13' || type === 32) {
+    if (type !== 'org.iso.QRCode') {
       this.setState({ scanned: true })
       if (this.state.scanned == true) {
-        const food = await this.foodService.get(data);
+        const food = await this.props.service.get(data);
         await this.props.products.add(data);
         this.props.navigation.navigate('Detail', { food });
       }
@@ -58,6 +56,12 @@ class ScannerScreen extends Component {
   }
 }
 
+mapStateToProps = (stateStore) => {
+  return {
+    service: stateStore.services.foodService
+  }
+};
+
 mapActionsToProps = (barcode) => {
   return {
     products: {
@@ -66,4 +70,4 @@ mapActionsToProps = (barcode) => {
   }
 }
 
-export default connect(null, mapActionsToProps)(ScannerScreen);
+export default connect(mapStateToProps, mapActionsToProps)(ScannerScreen);
