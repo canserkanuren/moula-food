@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Text, SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Loading from '../components/common/Loading';
 
 import { initShoppingList, clearShoppingList, delFromShoppingList } from '../redux/actions/shoppingActions';
 import ProductListItem from '../components/common/ProductListItem';
+import InfoCard from '../components/common/InfoCard';
 
 import historyStyle from '../assets/styles/historyStyle';
 import ScannerButton from '../components/common/ScannerButton';
@@ -46,7 +47,7 @@ class FavoritesScreen extends Component {
                   renderItem={({ item }) => <ProductListItem product={item} swippedPressFunc={this.removeFromShoppingList} pressFunc={this.navigateToDetails} />}
                 />
               ) : (
-                  <Text>Aucun produit en favoris</Text>
+                  <InfoCard text={'Aucun produit en favoris'}/>
                 )}
             </>
           ) : (

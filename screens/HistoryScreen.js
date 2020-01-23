@@ -4,6 +4,7 @@ import ProductCard from '../components/common/ProductCard.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Loading from '../components/common/Loading';
+import InfoCard from '../components/common/InfoCard';
 
 import { initHistorySearchList, clearHistorySearchList, delFromHistorySearchList } from '../redux/actions/historyActions';
 import { initHistoryScanList, clearHistoryScanList, delFromHistoryScanList } from '../redux/actions/historyActions';
@@ -71,7 +72,7 @@ class HistoryScreen extends Component {
                     </View>
                   </ScrollView>
                 ) : (
-                    <Text>Aucun historique disponible</Text>
+                    <InfoCard text={'Aucun historique disponible'}/>
                   )}
             </View>
           ) : (
