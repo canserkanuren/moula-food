@@ -27,13 +27,10 @@ class DetailsScreen extends Component {
   foodService = new FoodService();
 
   addToShoppingList = async (product) => {
-    console.log(`add ${product.barcode}`);
     await this.props.shopping.add(product.barcode);
-    console.log(this.props.shoppingProducts);
   }
 
   rmvFromShoppingList = (product) => {
-    console.log(`rmv ${product.barcode}`);
     this.props.shopping.remove(product.barcode);
   }
 

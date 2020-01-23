@@ -24,16 +24,11 @@ class FavoritesScreen extends Component {
   }
 
   removeFromShoppingList = (product) => {
-    console.log('suppresion de larticle');
-    console.log(product);
-
     this.props.shopping.remove(product);
   }
 
   componentDidMount = async () => {
     await this.props.shopping.init();
-
-    console.log(this.props.shoppingProducts)
   }
 
   render() {
