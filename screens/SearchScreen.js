@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Text, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import ScannerButton from '../components/common/ScannerButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToHistorySearchList } from '../redux/actions/historyActions';
 
+import InfoCard from '../components/common/InfoCard';
 import SearchListItem from '../components/common/SearchListItem';
 import Loading  from '../components/common/Loading';
 class SearchScreen extends Component {
@@ -20,6 +21,8 @@ class SearchScreen extends Component {
     this.setState({ search: search })
     if (search) {
       data = await this.props.service.search(search);
+      this.setState({ products: data });
+    } else {
       this.setState({ products: data });
     }
   };
@@ -43,7 +46,7 @@ class SearchScreen extends Component {
           lightTheme={false}
           round={true}
           placeholder="Tous les produits"
-          returnKeyType={'search'}
+          returnKeyType={'done'}
           onChangeText={this.updateSearch}
           value={search}
         />
@@ -56,9 +59,8 @@ class SearchScreen extends Component {
                   renderItem={({ item }) => <SearchListItem product={item} key={item.barcode} pressFunc={this.navigateToDetails}  />}
                 />
               ) : (
-                  <Text>Aucun produit</Text>
+                  <InfoCard text={'Aucun résultats'}/>
                 )}
-
             </>
           ) : (
               <Loading displayColor="teal" />
