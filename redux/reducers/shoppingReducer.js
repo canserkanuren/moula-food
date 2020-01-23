@@ -12,9 +12,9 @@ export default (state = INITIAL_STATE, action) => {
     case SHOPPING_CLEAR:
       return { shoppingProducts: action.payload };
     case SHOPPING_ADD:
-      return { shoppingProducts: action.payload };
+      return { shoppingProducts: action.payload.shoppingProducts };
     case SHOPPING_DEL:
-      return { shoppingProducts: action.payload };
+      return { shoppingProducts: action.payload.shoppingProducts };
     default:
       return state
   }
