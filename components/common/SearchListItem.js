@@ -15,7 +15,6 @@ export default class SearchListItem extends Component {
   }
 
   render() {
-    console.log(this.props.product);
     return (
       <TouchableHighlight
         activeOpacity={0.9}
