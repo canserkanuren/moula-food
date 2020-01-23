@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight, Image } from 'react-native';
+import { Text, View, TouchableHighlight, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-
+import { nutriscore } from '../../constant/constant';
 export default class SearchListItem extends Component {
 
   static propTypes = {
@@ -9,12 +9,13 @@ export default class SearchListItem extends Component {
     pressFunc: PropTypes.func.isRequired
   }
 
-  state = {}
+  state = { imageUrl: this.props.product.nutriscore ? nutriscore(this.props.product.nutriscore) : ''}
 
   componentDidMount() {
   }
 
   render() {
+    console.log(this.props.product);
     return (
       <TouchableHighlight
         activeOpacity={0.9}
@@ -38,7 +39,13 @@ export default class SearchListItem extends Component {
 
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', fontSize: 6 }}>
               <Text>{this.props.product.brands}</Text>
-              <Text>{this.props.product.nutriscore}</Text>
+              {
+                this.state.imageUrl ? (
+                  <Image
+                    style={Styles.nutriscore}
+                    source={this.state.imageUrl}
+                  />) : (<></>)
+              }
             </View>
           </View>
         </View>
@@ -46,3 +53,45 @@ export default class SearchListItem extends Component {
     )
   }
 }
+
+export const Styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    margin: 10
+  },
+  row: {
+    flexDirection: 'row',
+    margin: 0,
+    padding: 0
+  },
+  imageProduit: {
+    height: 130,
+    width: 80,
+    marginRight: 5,
+    borderRadius: 3
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  nutriscore: {
+    width: 100,
+    height: 50,
+    borderRadius: 5,
+    margin: 3,
+    resizeMode: 'stretch'
+  },
+  novascore: {
+    width: 50,
+    height: 80,
+    borderRadius: 5,
+    margin: 3,
+    resizeMode: 'stretch'
+  },
+  score: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+})

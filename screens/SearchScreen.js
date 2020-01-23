@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import { Text, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import ScannerButton from '../components/common/ScannerButton';
-import FoodService from '../services/FoodService';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addToHistorySearchList } from '../redux/actions/historyActions';
+
 import SearchListItem from '../components/common/SearchListItem';
 import Loading  from '../components/common/Loading';
-export default class SearchScreen extends Component {
-  foodService = new FoodService();
+class SearchScreen extends Component {
+
   state = {
     search: '',
     products: []
@@ -14,10 +17,11 @@ export default class SearchScreen extends Component {
 
   updateSearch = async search => {
     var data = [];
+    this.setState({ search: search })
     if (search) {
-      data = await this.foodService.search(search);
+      data = await this.props.service.search(search);
+      this.setState({ products: data });
     }
-    this.setState({ search: search, products: data});
   };
 
   static navigationOptions = (e) => {
@@ -26,7 +30,8 @@ export default class SearchScreen extends Component {
     }
   }
 
-  navigateToDetails = (product) => {
+  navigateToDetails = async (product) => {
+    await this.props.products.add(product.barcode);
     this.props.navigation.navigate('Detail', { food: product });
   }
 
@@ -62,3 +67,19 @@ export default class SearchScreen extends Component {
     )
   }
 }
+
+mapStateToProps = (stateStore) => {
+  return {
+    service: stateStore.services.foodService
+  }
+};
+
+mapActionsToProps = (barcode) => {
+  return {
+    products: {
+      add: bindActionCreators(addToHistorySearchList, barcode)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SearchScreen);
