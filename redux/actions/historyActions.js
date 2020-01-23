@@ -55,9 +55,16 @@ export const addToHistorySearchList = (barcode) => {
     if (products.length == HISTORY_SEARCH_MAX) products.shift()
     products.push(barcode);
     await AsyncStorage.setItem(HISTORY_SEARCH_LOCAL_STORAGE, JSON.stringify(products));
+    
+    productsToShop = [];
+    for (let index = 0; index < products.length; index++) {
+      product = await foodService.get(products[index]) || null;
+      if (product != null) productsToShop.push(product);
+    }
+    
     dispatch({
       type: HISTORY_SEARCH_ADD,
-      payload: products
+      payload: productsToShop
     });
   };
 }
@@ -69,9 +76,16 @@ export const delFromHistorySearchList = (barcode) => {
     const index = products.indexOf(barcode);
     products.splice(index, 1);
     await AsyncStorage.setItem(HISTORY_SEARCH_LOCAL_STORAGE, JSON.stringify(products));
+    
+    productsToShop = [];
+    for (let index = 0; index < products.length; index++) {
+      product = await foodService.get(products[index]) || null;
+      if (product != null) productsToShop.push(product);
+    }
+
     dispatch({
       type: HISTORY_SEARCH_DEL,
-      payload: products
+      payload: productsToShop
     });
   };
 }

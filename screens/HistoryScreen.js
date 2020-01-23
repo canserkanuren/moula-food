@@ -17,35 +17,6 @@ class HistoryScreen extends Component {
     historyProducts: null
   }
 
-  state = {
-    historyItems: [
-      {
-        barcode: '3256223510025',
-        name: 'Eau de source de montagne',
-        brand: 'Super U',
-        quality: 'Good'
-      },
-      {
-        barcode: '3256223510026',
-        name: 'Eau de source de montagne',
-        brand: 'Super U',
-        quality: 'Good'
-      },
-      {
-        barcode: '3256223510027',
-        name: 'Eau de source de montagne',
-        brand: 'Super U',
-        quality: 'Good'
-      },
-      {
-        barcode: '3256223510028',
-        name: 'Eau de source de montagne',
-        brand: 'Super U',
-        quality: 'Good'
-      }
-    ]
-  }
-
   static navigationOptions = (e) => {
     return {
       title: 'Mon historique'
@@ -63,17 +34,26 @@ class HistoryScreen extends Component {
   }
 
   componentDidMount = async () => {
+
+    this.setHistoryProducts();
+
+    this.eventListener = this.props.navigation.addListener('willFocus', () => {
+      this.setHistoryProducts();
+    });
+
+  }
+
+  setHistoryProducts = async () => {
     await this.props.history.scanned.init();
     const scanned = this.props.products.scanned;
-
     await this.props.history.searched.init();
-    const searched = this.props.products.searched
-
+    const searched = this.props.products.searched;
     const historyProducts = scanned.concat(searched);
     this.setState({ historyProducts: historyProducts });
   }
 
   render() {
+
     return (
       <ScannerButton navigation={this.props.navigation}>
         <SafeAreaView style={historyStyle.container}>
