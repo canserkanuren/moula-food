@@ -26,9 +26,7 @@ class ScannerScreen extends Component {
 
     // 32 => Android
     // org.gs1.EAN-13 => iOS
-    console.log('type', type);
     if (type !== 'org.iso.QRCode') {
-      console.log('slt');
       this.setState({ scanned: true })
       if (this.state.scanned == true) {
         const food = await this.props.service.get(data);
