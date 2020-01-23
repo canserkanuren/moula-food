@@ -16,12 +16,7 @@ const searchNavigator = createStackNavigator(
   {
     Search: { screen: SearchScreen },
     Scanner: { screen: ScannerScreen },
-    Detail: {
-      screen: DetailsScreen,
-      navigationOptions: {
-        title: 'Détail du produit'
-      }
-    }
+    Detail: { screen: DetailsScreen, path: 'detail' }
   },
   {
     initialRouteName: 'Search',
@@ -44,7 +39,8 @@ const searchNavigator = createStackNavigator(
 const historyNavigator = createStackNavigator(
   {
     History: { screen: HistoryScreen },
-    Scanner: { screen: ScannerScreen }
+    Scanner: { screen: ScannerScreen },
+    Detail: { screen: DetailsScreen, path: 'detail' }
   },
   {
     initialRouteName: 'History',
@@ -66,7 +62,8 @@ const historyNavigator = createStackNavigator(
 const favoritesNavigator = createStackNavigator(
   {
     Favorites: { screen: FavoritesScreen },
-    Scanner: { screen: ScannerScreen }
+    Scanner: { screen: ScannerScreen },
+    Detail: { screen: DetailsScreen, path: 'detail' }
   },
   {
     initialRouteName: 'Favorites',
@@ -83,12 +80,13 @@ const favoritesNavigator = createStackNavigator(
         color: 'white'
       }
     }
-  });
+  })
 
 const tabNavigator = createMaterialBottomTabNavigator(
   {
     Search: {
       screen: searchNavigator,
+      
       navigationOptions: {
         tabBarLabel: 'Recherche',
         tabBarIcon: ({ tintColor }) => (
@@ -99,6 +97,7 @@ const tabNavigator = createMaterialBottomTabNavigator(
     },
     History: {
       screen: historyNavigator,
+      path:'recherche',
       navigationOptions: {
         tabBarLabel: 'Historique',
         tabBarIcon: ({ tintColor }) => (

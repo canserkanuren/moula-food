@@ -20,7 +20,7 @@ export default class Indicator extends Component {
                 <>
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text style={{ marginTop: 5, marginLeft: 10}}>0</Text>
-                    <Text style={{ marginTop: 5, textAlign: 'right '}}>{this.props.score.value}</Text>
+                    <Text style={{ marginTop: 5, textAlign: 'right'}}>{this.props.score.value}</Text>
                   </View>
                 </>
               )
