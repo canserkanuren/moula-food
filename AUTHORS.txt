@@ -1,3 +1,3 @@
-MIFSUD Julien
-OUALLET Sébastien
-UREN Can Serkan
+MIFSUD Julien -- Détail d'un produit, page de recherche
+OUALLET Sébastien -- Redux, historique et favoris
+UREN Can Serkan -- Tous les élements natifs, à savoir scan de code barre + partage
